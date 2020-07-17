@@ -151,6 +151,12 @@
         ]
       },
       {
+        "title": "Restore Data from a Backup",
+        "urls": [
+          "/${VERSION}/cockroachcloud-backup-recovery.html"
+        ]
+      },
+      {
         "title": "Upgrade Your Cluster",
         "items": [
           {
