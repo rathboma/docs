@@ -28,7 +28,11 @@ If you experience hardware failures in a cluster, the recovery actions you need 
 
 ### Single-region survivability planning
 
-The table below shows the replication factor (RF) needed to achieve the listed fault tolerance goals (e.g., survive 1 failed node) for a single region cluster with 3 availability zones (AZ) and at least 1 node in each AZ:
+The table below shows the replication factor (RF) needed to achieve the listed fault tolerance goals for a single region, cloud-deployed cluster with nodes spread as evenly as possible across 3 availability zones (AZs):
+
+{{site.data.alerts.callout_info}}
+See our [basic production topology](topology-basic-production.html#configuration) for configuration guidance.
+{{site.data.alerts.end}}
 
 <table>
   <thead>
@@ -110,7 +114,7 @@ The table below describes what actions to take to recover from various hardware 
       <td style="color:#228B22"><b>√</b></td>
       <td rowspan="2">If the node or AZ becomes unavailable, check the <a href="admin-ui-overview-dashboard.html">Overview dashboard</a> on the Admin UI:
       <br><br>- If the down node is marked <b>Suspect</b>, try <a href="start-a-node.html">restarting the node</a>.
-      <br>- If the down node is marked <b>Dead</b>, <a href="remove-nodes.html">decommission the node</a>, wipe the store path, and then rejoin it back to the cluster using <a href="cockroach-start.html"><code>cockroach start</code></a>. If the node has additional hardware issues, decommission the node and add a new server (i.e., node) to the cluster using <code>cockroach start</code>. Ensure that <a href="cockroach-start.html#locality">locality flags are set</a> correctly upon node startup.</td>
+      <br>- If the down node is marked <b>Dead</b>, <a href="remove-nodes.html">decommission the node</a>, wipe the store path, and then <a href="cockroach-start.html">rejoin it back to the cluster</a>. If the node has additional hardware issues, decommission the node and <a href="cockroach-start.html">add a new node</a> to the cluster. Ensure that <a href="cockroach-start.html#locality">locality flags are set</a> correctly upon node startup.</td>
     </tr>
     <tr>
       <td style="color:#46a417"><b>1 AZ</td>
@@ -168,9 +172,9 @@ The chart below describes the CockroachDB default behavior when locality flags a
   <thead>
     <tr>
       <th>Fault Tolerance Goals</th>
-      <th>3 Regions</th>
-      <th>4 Regions</th>
-      <th>5 Regions</th>
+      <th>3 Regions<br>(9 Nodes Total)</th>
+      <th>4 Regions<br>(12 Nodes Total)</th>
+      <th>5 Regions<br>(15 Nodes Total)</th>
     </tr>
   </thead>
   <tbody>
@@ -252,7 +256,7 @@ The table below describes what actions to take to recover from various hardware 
       <td style="color:#228B22"><b>√</b></td>
       <td rowspan="2">If the node or AZ becomes unavailable check the <a href="admin-ui-overview-dashboard.html">Overview dashboard</a> on the Admin UI:
       <br><br>- If the down node is marked <b>Suspect</b>, try <a href="start-a-node.html">restarting the node</a>.
-      <br>- If the down node is marked <b>Dead</b>, <a href="remove-nodes.html">decommission the node</a>, wipe the store path, and then rejoin it back to the cluster using <a href="cockroach-start.html"><code>cockroach start</code></a>. If the node has additional hardware issues, decommission the node and add a new server (i.e., node) to the cluster using <code>cockroach start</code>. Ensure that <a href="cockroach-start.html#locality">locality flags are set</a> correctly upon node startup.
+      <br>- If the down node is marked <b>Dead</b>, <a href="remove-nodes.html">decommission the node</a>, wipe the store path, and then <a href="cockroach-start.html">rejoin it back to the cluster</a>. If the node has additional hardware issues, decommission the node and <a href="cockroach-start.html">add a new node</a> to the cluster. Ensure that <a href="cockroach-start.html#locality">locality flags are set</a> correctly upon node startup.
       </td>
     </tr>
     <tr>
@@ -262,7 +266,7 @@ The table below describes what actions to take to recover from various hardware 
     <tr>
       <td style="color:#46a417"><b>1 Region</b></td>
       <td style="color:#228B22"><b>√</b></td>
-      <td>Check the <a href="admin-ui-overview-dashboard.html">Overview dashboard</a> on the Admin UI. If nodes are marked <b>Dead</b>, <a href="remove-nodes.html">decommission</a> and add 3 new nodes in a new region.</td>
+      <td>Check the <a href="admin-ui-overview-dashboard.html">Overview dashboard</a> on the Admin UI. If nodes are marked <b>Dead</b>, <a href="remove-nodes.html">decommission the nodes</a> and <a href="start-a-node.html">add 3 new nodes</a> in a new region. Ensure that <a href="cockroach-start.html#locality">locality flags are set</a> correctly upon node startup.</td>
     </tr>
     <tr>
       <td style="color:#46a417"><b>2 or More Regions</b></td>
