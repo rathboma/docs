@@ -110,7 +110,7 @@ The table below describes what actions to take to recover from various hardware 
       <td style="color:#228B22"><b>√</b></td>
       <td rowspan="2">If the node or AZ becomes unavailable, check the <a href="admin-ui-overview-dashboard.html">Overview dashboard</a> on the Admin UI:
       <br><br>- If the down node is marked <b>Suspect</b>, try <a href="start-a-node.html">restarting the node</a>.
-      <br>- If the down node is marked <b>Dead</b>, <a href="remove-nodes.html">decommission the node</a> and then join it back to the cluster using <a href="cockroach-start.html"><code>cockroach start</code></a>. If the node has additional hardware issues, decommission the node and add a new server (i.e., node) to the cluster using <code>cockroach start</code>.</td>
+      <br>- If the down node is marked <b>Dead</b>, <a href="remove-nodes.html">decommission the node</a>, wipe the store path, and then rejoin it back to the cluster using <a href="cockroach-start.html"><code>cockroach start</code></a>. If the node has additional hardware issues, decommission the node and add a new server (i.e., node) to the cluster using <code>cockroach start</code>. Ensure that <a href="cockroach-start.html#locality">locality flags are set</a> correctly upon node startup.</td>
     </tr>
     <tr>
       <td style="color:#46a417"><b>1 AZ</td>
@@ -252,7 +252,7 @@ The table below describes what actions to take to recover from various hardware 
       <td style="color:#228B22"><b>√</b></td>
       <td rowspan="2">If the node or AZ becomes unavailable check the <a href="admin-ui-overview-dashboard.html">Overview dashboard</a> on the Admin UI:
       <br><br>- If the down node is marked <b>Suspect</b>, try <a href="start-a-node.html">restarting the node</a>.
-      <br>- If the down node is marked <b>Dead</b>, <a href="remove-nodes.html">decommission the node</a> and then join it back to the cluster using <a href="cockroach-start.html"><code>cockroach start</code></a>. If the node has additional hardware issues, decommission the node and add a new server (i.e., node) to the cluster using <code>cockroach start</code>.
+      <br>- If the down node is marked <b>Dead</b>, <a href="remove-nodes.html">decommission the node</a>, wipe the store path, and then rejoin it back to the cluster using <a href="cockroach-start.html"><code>cockroach start</code></a>. If the node has additional hardware issues, decommission the node and add a new server (i.e., node) to the cluster using <code>cockroach start</code>. Ensure that <a href="cockroach-start.html#locality">locality flags are set</a> correctly upon node startup.
       </td>
     </tr>
     <tr>
@@ -316,7 +316,7 @@ If your cluster is running and you do not have a backup that encapsulates the ti
 If you have corrupted data in a database or table, [restore](restore.html) the object from a from a prior [backup](backup.html). If revision history is in the backup, you can restore from a [point in time](backup-and-restore-advanced-options.html#backup-with-revision-history-and-point-in-time-restore).
 
 {{site.data.alerts.callout_info}}
-If the table you are restoring has [foreign keys](foreign-key.html), [careful consideration](backup-and-restore-advanced-options.html#remove-the-foreign-key-before-restore) should be applied to make sure data integrity is maintained during the restore process.
+If the table you are restoring has foreign keys, [careful consideration](backup-and-restore-advanced-options.html#remove-the-foreign-key-before-restore) should be applied to make sure data integrity is maintained during the restore process.
 {{site.data.alerts.end}}
 
 {{site.data.alerts.callout_success}}
